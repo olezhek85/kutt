@@ -1,10 +1,12 @@
-#!/bin/bash
+#!/bin/bash -x
 set -ev
 
 DOCKER_COMPOSE_VERSION="1.21.2"
 
 # Install docker-compose
-rm /usr/local/bin/docker-compose
+if [ ! -f /usr/local/bin/docker-compose ]; then
+  rm /usr/local/bin/docker-compose
+fi
 curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > docker-compose
 chmod +x docker-compose
 mv docker-compose /usr/local/bin
