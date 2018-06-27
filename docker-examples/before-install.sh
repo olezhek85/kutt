@@ -4,10 +4,14 @@ set -ev
 DOCKER_COMPOSE_VERSION="1.21.2"
 
 # Install docker-compose
-if [ ! -f /usr/local/bin/docker-compose ]; then
+if [ -f /usr/local/bin/docker-compose ]; then
   rm /usr/local/bin/docker-compose
 fi
-curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > docker-compose
+
+url= https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m
+echo $url
+
+curl -L $url > docker-compose
 chmod +x docker-compose
 mv docker-compose /usr/local/bin
 
